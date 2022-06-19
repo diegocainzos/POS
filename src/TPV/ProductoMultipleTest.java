@@ -30,6 +30,7 @@ class ProductoMultipleTest {
         float pVino = 10;
         float pZamburinas = 8;
         //Los precios individuales
+
         assertEquals(pZamburinasIva,zamburinas.getPVP());
         assertEquals(pVinoIva,vino.getPVP());
         assertEquals(pCafe,cafeLeite.getPrecio());

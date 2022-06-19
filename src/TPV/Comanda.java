@@ -8,7 +8,7 @@ public class Comanda {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     int mesa;
     ArrayList<EntradaComanda> lineaComanda = new ArrayList<>();
-    EstadoComanda estado;
+    EstadoComanda estado = Pendiente.getInstancia();
 
     public EstadoComanda getEstado(){
         return estado;
@@ -16,53 +16,11 @@ public class Comanda {
     public void setEstado(EstadoComanda estado){
         this.estado = estado;
     }
-    void anadirComanda(ProductoMultiple p, float cantidad) {
-            boolean cont = true;
-            //Se recorren los arrays para comprobar que existen las existencias necesarias para el pedido
-            for (Ingrediente t : p.aIngredientes) {
-                if ((cantidad * t.numRacion) > t.existencias) {
-                    System.out.println("No hay existencias de " + t.getNombre());
-                    cont = false;
-                }
-            }
-
-            for (ProductoIndividual t : p.aIndividuales) {
-
-                if ((cantidad * t.numRacion) > t.existencias) {
-                    System.out.println("No hay existencias de " + t.getNombre());
-                    cont = false;
-                }
-            }
-            //Si se puede realizar el pedido, eliminamos las existencias necesarias del stock
-            if (cont) {
-                for (Ingrediente t : p.aIngredientes) {
-                    t.existencias -= (cantidad * t.numRacion);
-                }
-
-                for (ProductoIndividual t : p.aIndividuales) {
-                    t.existencias -= (cantidad * t.numRacion);
-                }
-                //Se añade la comanda a la linea del ticket
-                EntradaComanda LineaAux = new EntradaComanda(cantidad, p);
-                lineaComanda.add(LineaAux);
-                //System.out.println("Comanda añadida");
-            } else
-                System.out.println("Comanda rechazada");
-
-
+    void anadirComanda(ProductoMultiple p, int cantidad) {
+           estado.anadirComanda(this, p, cantidad);
     }
-    void anadirComanda(ProductoIndividual p, float cantidad){
-
-        if(cantidad>p.existencias)
-            System.out.println("No hay existencias de "+p.getNombre()+" comanda rechazada");
-            
-        else{
-            p.existencias -=cantidad;
-            EntradaComanda LineaAux = new EntradaComanda(cantidad, p);
-            lineaComanda.add(LineaAux);
-            //System.out.println("Comanda añadida "+p.getNombre());
-            
-        }
+    void anadirComanda(ProductoIndividual p, int cantidad){
+        estado.anadirComanda(this, p, cantidad);
     }
     void solicitarCuenta(){
         imprimirCuenta();

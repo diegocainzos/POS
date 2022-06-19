@@ -7,5 +7,5 @@ public interface EstadoComanda {
     void marcharse(Comanda c);
     void anadirComanda(Comanda c, ProductoMultiple p, int cantidad);
     void anadirComanda(Comanda c, ProductoIndividual p, int cantidad);
-
+    void solicitarCuenta(Comanda c);
 }

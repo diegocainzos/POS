@@ -72,4 +72,7 @@ public class Pendiente implements  EstadoComanda{
 
 
     }
+    @Override
+    public void solicitarCuenta(Comanda c) {
+    }
 }

@@ -95,14 +95,14 @@ class ComandaTest {
           comanda.mesa = 5;
           comanda.anadirComanda(vino,2);
           comanda.anadirComanda(menu,3);
-          comanda.imprimirCuenta();
+          comanda.solicitarCuenta();
           String cuenta ="Mesa número 5\n" +comanda.dtf.format(LocalDateTime.now())+
                   "\n" +
                   "Producto    Cantidad Precio PVP unidad  PVP total\n" +
                   "=====================================================\n" +
                   "Viño           2,00  10,00      11,00      22,00\n" +
                   "Menu           3,00  16,00      17,60      52,80\n" +
-                  "\n" +
+                  "\n" + "# Pendiente de cobro\n"+
                   "Total sin impuestos   68,00\n" +
                   "Total de impuestos     6,80\n" +
                   "Total                 74,80\n" +
