@@ -10,13 +10,35 @@ public class Pendiente implements  EstadoComanda{
     @Override
     public void pagar(Comanda c) {
     c.setEstado(Pagado.getInstancia());
+    Factura factura = new Factura();
+    factura.comanda = c;
 
     }
-
+    /*Podr´ıa darse el caso de que un cliente realice un pedido y lo cancele enseguida antes
+    de ser servido. En este caso, la comanda pasa a estar cancelada y ya no se podr´a hacer
+    nada con ella. Es necesario en este caso devolver al stock los productos que hab´ıan sido
+    registrados en dicha comanda*/
     @Override
     public void cancelar(Comanda c) {
         c.setEstado(Cancelado.getInstancia());
-    }
+        for (EntradaComanda entradaComanda : c.lineaComanda) {
+            //si es un producto individual
+            if (entradaComanda.individual !=null)
+            entradaComanda.individual.anadirExis(entradaComanda.cantidad * entradaComanda.individual.numRacion);
+            if (entradaComanda.multiple != null){
+                for (Ingrediente t : entradaComanda.multiple.aIngredientes) {
+                    t.anadirExis(entradaComanda.cantidad* t.numRacion);
+                    }
+                for (ProductoIndividual t : entradaComanda.multiple.aIndividuales) {
+                    t.anadirExis(entradaComanda.cantidad* t.numRacion);
+                }
+            }
+
+
+            }
+        }
+
+
 
     @Override
     public void marcharse(Comanda c) {

@@ -2,12 +2,21 @@ package TPV;
 
 import java.time.LocalDateTime;
 
-public class ImprimirCuenta {
+public class Factura {
+    float pagado;
+    enum Metodo {TARJETA,DESCUENTO,INVITACION,CHEQUE};
+    Metodo metodo;
+    int idFactura;
+    public static int auxId=0;
     Comanda comanda;
-   /* void imprimir(){
-        float price=0;
-        float total=0;
-        float totalTaxes;
+    float price=0;
+    float total=0;
+    float totalTaxes=0;
+    public Factura(){
+        this.idFactura = auxId++;
+    }
+    void imprimir(){
+        System.out.println("Factura simplificada número "+idFactura);
         StringBuilder sv = new StringBuilder();
         System.out.println("Mesa número "+ comanda.mesa + "\n" + comanda.dtf.format(LocalDateTime.now()));
         System.out.println("Producto    Cantidad Precio PVP unidad  PVP total\n" + "=====================================================");
@@ -39,8 +48,19 @@ public class ImprimirCuenta {
         sb.append(String.format("Total sin impuestos  %6.2f\n", price));
         sb.append(String.format("Total de impuestos   %6.2f\n", totalTaxes));
         sb.append(String.format("Total                %6.2f\n\n", total));
+        sb.append(String.format("# Forma de pago:\n"));
+        switch (metodo){
+            case INVITACION -> {
+                sb.append(String.format("Cheque regalo\n"));
+                sb.append(String.format("Descuento %.2f\n",total));
+                sb.append(String.format("Total  %.2f\n",0));
+                sb.append(String.format("Entregado %.2f",0));
+                sb.append(String.format("Devolución %.2f",0));
+            }
+        }
         System.out.println(sb);
 
 
-    }*/
+
+    }
 }

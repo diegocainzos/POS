@@ -6,22 +6,19 @@ public class Cancelado implements EstadoComanda{
     public static Cancelado getInstancia() {
         return instancia;
     }
+    //No se puede realizar más acciones si está cancelada
     @Override
     public void pagar(Comanda c) {
     }
-
     @Override
     public void cancelar(Comanda c) {
     }
-
     @Override
     public void marcharse(Comanda c) {
     }
-
     @Override
     public void anadirComanda(Comanda c, ProductoMultiple p, int cantidad) {
     }
-
     @Override
     public void anadirComanda(Comanda c, ProductoIndividual p, int cantidad) {
     }
@@ -29,4 +26,5 @@ public class Cancelado implements EstadoComanda{
     public void solicitarCuenta(Comanda c) {
 
     }
+
 }

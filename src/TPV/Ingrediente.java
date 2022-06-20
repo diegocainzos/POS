@@ -9,11 +9,11 @@ public class Ingrediente extends Producto{
         this.existencias = existencias;
         this.iva = iva;
     }
-    void anadirExis(Ingrediente p, float exist){
-        p.existencias += exist;
+    void anadirExis( float exist){
+        existencias += exist;
     }
-    void restarExis(Ingrediente p, float exist){
-        p.existencias -= exist;
+    void restarExis(float exist){
+        existencias -= exist;
     }
 
     public float getPVP(){
